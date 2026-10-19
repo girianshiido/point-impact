@@ -1,0 +1,20 @@
+{
+  "name": "point-impact",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "test": "node --experimental-strip-types --test tests/*.test.ts",
+    "dev": "node scripts/serve.mjs",
+    "check": "tsc --noEmit",
+    "verify": "npm run check && npm test"
+  },
+  "engines": {
+    "node": ">=24"
+  },
+  "devDependencies": {
+    "jsdom": "26.1.0",
+    "typescript": "5.9.3"
+  }
+}
