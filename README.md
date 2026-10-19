@@ -16,12 +16,14 @@ Pour la version installable sur écran d’accueil, servir le dossier `dist/` vi
 - Déblocage séquentiel, paramètres fixés selon l’objectif pédagogique.
 - Commandes au pas de 0,25, boutons et curseurs, coefficient a toujours non nul.
 - Cibles simultanées, sommet imposé distinct des intersections ordinaires.
-- Obstacles circulaires : la distance minimale à la parabole est calculée sur x ∈ [−6 ; 6], indépendamment de l’échantillonnage graphique.
-- Dernier monde : 45 secondes et six réglages. Un déplacement complet de curseur compte pour un réglage ; chaque bouton ± compte pour un réglage. Le temps continue en arrière-plan.
+- Obstacles circulaires infranchissables pendant les réglages : contrôle géométrique continu sur x ∈ [−6 ; 6], indépendant de la fréquence d’affichage et des sauts de curseur. Le déplacement s’arrête au dernier quart de pas autorisé. Un essai entièrement bloqué ne consomme pas de réglage.
+- Chaque niveau avec obstacles dispose d’un trajet garanti, réalisable dans le budget de réglages. Chaque obstacle élimine au moins un ordre de déplacement possible. Le signe de a est fixé dans ces niveaux pour rester dans une famille continue de paraboles.
+- Huit défis avancés (38–40 et 46–50) donnent trois points distincts, sans sommet ni paire de même ordonnée.
+- Dernier monde : 45 secondes et douze réglages. Un déplacement complet de curseur compte pour un réglage ; chaque bouton ± compte pour un réglage. Le temps continue en arrière-plan.
 - 150 étoiles, expérience, douze succès, défi quotidien déterministe à la date locale et entraînement généré sans limite.
 - Indices mathématiques, affichage des coordonnées exactes, explication après réussite.
 - Sauvegarde locale, export et fusion d’une sauvegarde JSON.
-- Sons facultatifs, particules limitées à la réussite et préférence de réduction des mouvements respectée.
+- Sons facultatifs, transitions brèves des paramètres, particules limitées à la réussite et préférence de réduction des mouvements respectée.
 - Aucun compte, aucune publicité, aucun service externe en fonctionnement.
 
 ### Étoiles
@@ -64,7 +66,7 @@ Les chemins sont relatifs : le jeu fonctionne sous un sous-répertoire GitHub Pa
 
 Après la première visite en ligne, attendre **« Prêt hors ligne »**. Sur iPhone/iPad : Safari → Partager → Sur l’écran d’accueil. Sur Android : menu du navigateur → Installer.
 
-La mise à jour du service worker est activée lorsque les anciennes pages sont fermées. Lors d’une évolution des fichiers de production, changer le nom de cache dans `public/sw.js`. Le navigateur peut évincer ses données : l’export de progression reste recommandé pour les conserver durablement.
+Les nouvelles versions du cache s’activent dès leur téléchargement ; recharger la page pour obtenir la nouvelle interface. Lors d’une évolution des fichiers de production, changer le nom de cache dans `public/sw.js`. Le navigateur peut évincer ses données : l’export de progression reste recommandé pour les conserver durablement.
 
 ## Structure
 
@@ -79,6 +81,6 @@ tests/               Tests de géométrie, génération, build et parcours simul
 
 ## Vérifications effectuées
 
-Vérification TypeScript stricte, tests des cinquante niveaux et de 5 000 niveaux générés, comparaison des distances à une référence dense, tests de tangence, objectifs simultanés, sommet imposé, défi quotidien, construction et couverture du cache hors ligne. Le parcours des cinquante niveaux, le déblocage, les succès, la sauvegarde et le budget de réglages sont testés dans un DOM simulé.
+Vérification TypeScript stricte, tests des cinquante niveaux et de 5 000 niveaux générés, comparaison des distances à une référence dense, tests de tangence, détection des collisions sur le volume balayé, absence de franchissement entre deux positions libres, parcours garanti et obstacles utiles, objectifs simultanés, sommet imposé, défi quotidien, construction et couverture du cache hors ligne. Le parcours des cinquante niveaux, le déblocage, les succès, la sauvegarde et le budget de réglages sont testés dans un DOM simulé.
 
 **Limite de validation :** le rendu visuel, les gestes tactiles réels, l’installation PWA et la reprise hors ligne n’ont pas encore été contrôlés dans un navigateur réel. Un essai sur iPhone et sur un appareil Android modeste reste nécessaire avant diffusion aux élèves.
